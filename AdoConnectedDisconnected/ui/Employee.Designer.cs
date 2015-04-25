@@ -44,11 +44,14 @@
             this.btnGuncelle = new System.Windows.Forms.Button();
             this.btnYeni = new System.Windows.Forms.Button();
             this.btnKaydet = new System.Windows.Forms.Button();
+            this.btn2db = new System.Windows.Forms.Button();
+            this.btnAll2Db = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtID)).BeginInit();
             this.SuspendLayout();
             // 
             // lstEmployees
             // 
+            this.lstEmployees.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lstEmployees.Dock = System.Windows.Forms.DockStyle.Left;
             this.lstEmployees.FormattingEnabled = true;
             this.lstEmployees.ItemHeight = 15;
@@ -69,9 +72,10 @@
             // 
             // txtAd
             // 
+            this.txtAd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAd.Location = new System.Drawing.Point(309, 18);
             this.txtAd.Name = "txtAd";
-            this.txtAd.Size = new System.Drawing.Size(186, 23);
+            this.txtAd.Size = new System.Drawing.Size(214, 23);
             this.txtAd.TabIndex = 2;
             // 
             // label2
@@ -85,16 +89,18 @@
             // 
             // txtSoyad
             // 
+            this.txtSoyad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSoyad.Location = new System.Drawing.Point(309, 56);
             this.txtSoyad.Name = "txtSoyad";
-            this.txtSoyad.Size = new System.Drawing.Size(186, 23);
+            this.txtSoyad.Size = new System.Drawing.Size(214, 23);
             this.txtSoyad.TabIndex = 4;
             // 
             // txtUlke
             // 
+            this.txtUlke.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUlke.Location = new System.Drawing.Point(309, 94);
             this.txtUlke.Name = "txtUlke";
-            this.txtUlke.Size = new System.Drawing.Size(186, 23);
+            this.txtUlke.Size = new System.Drawing.Size(214, 23);
             this.txtUlke.TabIndex = 6;
             // 
             // label3
@@ -108,9 +114,10 @@
             // 
             // txtSehir
             // 
+            this.txtSehir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSehir.Location = new System.Drawing.Point(309, 132);
             this.txtSehir.Name = "txtSehir";
-            this.txtSehir.Size = new System.Drawing.Size(186, 23);
+            this.txtSehir.Size = new System.Drawing.Size(214, 23);
             this.txtSehir.TabIndex = 8;
             // 
             // label4
@@ -135,7 +142,7 @@
             // 
             this.dtpDogumTarihi.Location = new System.Drawing.Point(309, 170);
             this.dtpDogumTarihi.Name = "dtpDogumTarihi";
-            this.dtpDogumTarihi.Size = new System.Drawing.Size(186, 23);
+            this.dtpDogumTarihi.Size = new System.Drawing.Size(214, 23);
             this.dtpDogumTarihi.TabIndex = 12;
             // 
             // label5
@@ -151,20 +158,23 @@
             // 
             this.txtID.Location = new System.Drawing.Point(309, 211);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(186, 23);
+            this.txtID.Size = new System.Drawing.Size(214, 23);
             this.txtID.TabIndex = 14;
             // 
             // btnGuncelle
             // 
+            this.btnGuncelle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuncelle.Location = new System.Drawing.Point(376, 255);
             this.btnGuncelle.Name = "btnGuncelle";
-            this.btnGuncelle.Size = new System.Drawing.Size(61, 23);
+            this.btnGuncelle.Size = new System.Drawing.Size(80, 23);
             this.btnGuncelle.TabIndex = 15;
             this.btnGuncelle.Text = "Güncelle";
             this.btnGuncelle.UseVisualStyleBackColor = true;
+            this.btnGuncelle.Click += new System.EventHandler(this.btnGuncelle_Click);
             // 
             // btnYeni
             // 
+            this.btnYeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnYeni.Location = new System.Drawing.Point(309, 255);
             this.btnYeni.Name = "btnYeni";
             this.btnYeni.Size = new System.Drawing.Size(61, 23);
@@ -175,18 +185,44 @@
             // 
             // btnKaydet
             // 
-            this.btnKaydet.Location = new System.Drawing.Point(443, 255);
+            this.btnKaydet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnKaydet.Location = new System.Drawing.Point(462, 255);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(61, 23);
             this.btnKaydet.TabIndex = 17;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.UseVisualStyleBackColor = true;
+            this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
+            // 
+            // btn2db
+            // 
+            this.btn2db.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn2db.Location = new System.Drawing.Point(309, 284);
+            this.btn2db.Name = "btn2db";
+            this.btn2db.Size = new System.Drawing.Size(103, 23);
+            this.btn2db.TabIndex = 18;
+            this.btn2db.Text = "Gönder";
+            this.btn2db.UseVisualStyleBackColor = true;
+            this.btn2db.Click += new System.EventHandler(this.btn2db_Click);
+            // 
+            // btnAll2Db
+            // 
+            this.btnAll2Db.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAll2Db.Location = new System.Drawing.Point(418, 284);
+            this.btnAll2Db.Name = "btnAll2Db";
+            this.btnAll2Db.Size = new System.Drawing.Size(105, 23);
+            this.btnAll2Db.TabIndex = 19;
+            this.btnAll2Db.Text = "Tümünü Gönder";
+            this.btnAll2Db.UseVisualStyleBackColor = true;
+            this.btnAll2Db.Click += new System.EventHandler(this.btnAll2Db_Click);
             // 
             // Employee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 364);
+            this.ClientSize = new System.Drawing.Size(557, 364);
+            this.Controls.Add(this.btnAll2Db);
+            this.Controls.Add(this.btn2db);
             this.Controls.Add(this.btnKaydet);
             this.Controls.Add(this.btnYeni);
             this.Controls.Add(this.btnGuncelle);
@@ -207,6 +243,7 @@
             this.Name = "Employee";
             this.Padding = new System.Windows.Forms.Padding(15);
             this.Text = "Employee";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Employee_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtID)).EndInit();
             this.ResumeLayout(false);
@@ -232,5 +269,7 @@
         private System.Windows.Forms.Button btnGuncelle;
         private System.Windows.Forms.Button btnYeni;
         private System.Windows.Forms.Button btnKaydet;
+        private System.Windows.Forms.Button btn2db;
+        private System.Windows.Forms.Button btnAll2Db;
     }
 }

@@ -11,6 +11,7 @@ namespace AdoConnectedDisconnected.lib
 {
     public class Employee : dbObject
     {
+        public bool changed = false;
         public int id { get; set; }
         public string ad { get; set; }
         public string soyad { get; set; }
@@ -42,39 +43,48 @@ namespace AdoConnectedDisconnected.lib
             SqlCommand komut;
             string sqlKod;
 
-            sqlKod = "UPDATE Employees";
+            sqlKod = "UPDATE Employees ";
             sqlKod += "SET FirstName = @Ad, ";
             sqlKod += "LastName = @Soyad, ";
             sqlKod += "City = @Sehir, ";
             sqlKod += "Country = @Ulke, ";
             sqlKod += "BirthDate = @DogumTarihi ";
-            sqlKod += " WHERE ID = @Id ; ";
+            sqlKod += " WHERE EmployeeID = @ID ; ";
 
             komut = new SqlCommand(cmdText: sqlKod, connection: conn);
             komut.Parameters.AddWithValue("@Ad", ad);
             komut.Parameters.AddWithValue("@Soyad", soyad);
             komut.Parameters.AddWithValue("@Sehir", sehir);
             komut.Parameters.AddWithValue("@Ulke", ulke);
-            komut.Parameters.AddWithValue("@Id", id);
+            komut.Parameters.AddWithValue("@ID", id);
             komut.Parameters.AddWithValue("@DogumTarihi", dogumTarihi);
 
             komut.ExecuteScalar();
 
+            changed = false;
+
             base.disconnect();
+            
         }
 
         public override string ToString()
         {
-            return String.Format(
-                "{0} | {1} {2}, {3}-{4}",
-                id, ad, soyad, ulke, sehir
-                );
+            //return String.Format(
+            //    "{0} | {1} {2}, {3}-{4}",
+            //    id, ad, soyad, ulke, sehir
+            //    );
+            return TamAd;
         }
 
         public string TamAd
         {
             get {
-                return String.Format("{1}, {0}", ad, soyad);
+                var e = String.Format("{1}, {0}", ad, soyad);
+                if (changed){
+                    e += " [*]";
+                }
+                return e;
+
             }
         }
 

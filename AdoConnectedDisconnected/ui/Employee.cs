@@ -16,6 +16,8 @@ namespace AdoConnectedDisconnected.ui
     {
         public List<lib.Employee> calisanlar = new List<lib.Employee>();
         public lib.Employee guncellenecekCalisan;
+        public int guncellenecekCalisanID = -1;
+
         public Employee()
         {
             InitializeComponent();
@@ -67,33 +69,48 @@ namespace AdoConnectedDisconnected.ui
                 );
             }
 
-            foreach (var c in calisanlar)
-            {
-                Trace.WriteLine(c);
-                lstEmployees.DataSource = calisanlar;
-                lstEmployees.DisplayMember = "TamAd";
-                lstEmployees.ValueMember = "id";
-            }
-
             uiYenile();
+            uiCheck();
+
+
+            //lstEmployees.DataSource = calisanlar;
+            //lstEmployees.DisplayMember = "TamAd";
+            //lstEmployees.ValueMember = "id";
+
+
         }
 
         private void lstEmployees_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var x = (lib.Employee)lstEmployees.SelectedItem;
-            guncellenecekCalisan = x;
-            x.yerlestir(
-                txtAd: txtAd,
-                txtSoyad: txtSoyad,
-                txtSehir: txtSehir,
-                txtUlke: txtUlke,
-                dtpDogumTarihi: dtpDogumTarihi,
-                txtId: txtID
-                );
-            uiYenile();
+            guncellenecekCalisanID = lstEmployees.SelectedIndex;
+
+
+            if (lstEmployees.SelectedIndex > -1)
+            {
+                var x = calisanlar[guncellenecekCalisanID];
+                guncellenecekCalisan = x;
+                x.yerlestir(
+                    txtAd: txtAd,
+                    txtSoyad: txtSoyad,
+                    txtSehir: txtSehir,
+                    txtUlke: txtUlke,
+                    dtpDogumTarihi: dtpDogumTarihi,
+                    txtId: txtID
+                    );
+            }
+
+            uiCheck();
+
         }
 
         private void btnYeni_Click(object sender, EventArgs e)
+        {
+            uiTemizle();
+            guncellenecekCalisan = null;
+            uiCheck();
+        }
+
+        private void uiTemizle()
         {
             txtAd.Clear();
             txtID.Value = 0;
@@ -101,14 +118,63 @@ namespace AdoConnectedDisconnected.ui
             txtSehir.Clear();
             txtUlke.Clear();
             dtpDogumTarihi.ResetText();
-            guncellenecekCalisan = null;
-            uiYenile();
+           // lstEmployees.SelectedIndex = -1;
         }
 
         private void uiYenile()
         {
+            guncellenecekCalisan = null;
+
+
+            lstEmployees.Items.Clear();
+            lstEmployees.Items.AddRange(calisanlar.ToArray());
+        }
+
+        private void uiCheck()
+        {
+
             btnGuncelle.Enabled = !(guncellenecekCalisan == null);
             btnKaydet.Enabled = guncellenecekCalisan == null;
+            btn2db.Enabled = lstEmployees.SelectedIndex > -1;
+        }
+
+
+        private void btnKaydet_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnGuncelle_Click(object sender, EventArgs e)
+        {
+            calisanlar[guncellenecekCalisanID] =
+            new lib.Employee()
+             {
+                 ad = txtAd.Text,
+                 soyad = txtSoyad.Text,
+                 sehir = txtSehir.Text,
+                 ulke = txtUlke.Text,
+                 dogumTarihi = dtpDogumTarihi.Value,
+                 changed = true,
+                 id = calisanlar[guncellenecekCalisanID].id
+             };
+            uiTemizle();
+            uiYenile();
+        }
+
+        private void btn2db_Click(object sender, EventArgs e)
+        {
+            ((lib.Employee)lstEmployees.SelectedItem).guncelle();
+            uiYenile();
+        }
+
+        private void btnAll2Db_Click(object sender, EventArgs e)
+        {
+            foreach (var c in lstEmployees.Items)
+            {
+                 ((lib.Employee)c).guncelle();
+            }
+            uiYenile();
         }
 
 
