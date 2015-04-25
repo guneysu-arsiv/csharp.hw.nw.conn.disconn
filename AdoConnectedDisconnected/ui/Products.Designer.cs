@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // uiProducts
+            // Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 349);
-            this.Name = "uiProducts";
-            this.Text = "uiProducts";
+            this.Name = "Products";
+            this.Text = "Products";
             this.ResumeLayout(false);
 
         }

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="lib\dbObject.cs" />
     <Compile Include="lib\Employee.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>

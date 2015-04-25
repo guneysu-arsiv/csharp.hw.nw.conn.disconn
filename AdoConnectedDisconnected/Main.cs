@@ -41,5 +41,22 @@ namespace AdoConnectedDisconnected
             }.Show();
 
         }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                new lib.Employee().guncelle();
+
+            }
+            catch (Exception buzz)
+            {
+
+                MessageBox.Show(
+                    buzz.Message, "", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
+            }
+        }
     }
 }
