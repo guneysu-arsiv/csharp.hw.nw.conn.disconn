@@ -44,19 +44,12 @@ namespace AdoConnectedDisconnected
 
         private void Main_Load(object sender, EventArgs e)
         {
-            try
+            new ui.Employee()
             {
-                new lib.Employee().guncelle();
+                MdiParent = this
+            }.Show();
 
-            }
-            catch (Exception buzz)
-            {
 
-                MessageBox.Show(
-                    buzz.Message, "", 
-                    MessageBoxButtons.OK, 
-                    MessageBoxIcon.Error);
-            }
         }
     }
 }

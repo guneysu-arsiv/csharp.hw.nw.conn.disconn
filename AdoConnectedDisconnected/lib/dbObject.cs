@@ -28,7 +28,7 @@ namespace AdoConnectedDisconnected.lib
             }
         }
 
-        private static SqlConnection dbConnect(string db = "Northwind")
+        public static SqlConnection dbConnect(string db = "Northwind")
         {
             SqlConnection conn = new SqlConnection();
             string connStr = String.Format(
@@ -65,11 +65,19 @@ namespace AdoConnectedDisconnected.lib
 
         public dbObject()
         {
-            connect();
+            // connect();
         }
+
         ~dbObject()
         {
-            disconnect();
+            try
+            {
+                disconnect();
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
