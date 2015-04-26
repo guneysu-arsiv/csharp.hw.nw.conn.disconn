@@ -20,7 +20,7 @@ namespace AdoConnectedDisconnected.lib
             }
             catch (Exception)
             {
-                conn = dbConnect();
+                conn = dbConnect("NORTHWIND");
             }
             finally
             {
@@ -28,7 +28,7 @@ namespace AdoConnectedDisconnected.lib
             }
         }
 
-        public static SqlConnection dbConnect(string db = "Northwind")
+        public static SqlConnection dbConnect(string db = "NorthWind")
         {
             SqlConnection conn = new SqlConnection();
             string connStr = String.Format(
