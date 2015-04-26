@@ -46,6 +46,7 @@
             this.btnKaydet = new System.Windows.Forms.Button();
             this.btn2db = new System.Windows.Forms.Button();
             this.btnAll2Db = new System.Windows.Forms.Button();
+            this.btnSil = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtID)).BeginInit();
             this.SuspendLayout();
             // 
@@ -199,7 +200,7 @@
             this.btn2db.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn2db.Location = new System.Drawing.Point(309, 284);
             this.btn2db.Name = "btn2db";
-            this.btn2db.Size = new System.Drawing.Size(103, 23);
+            this.btn2db.Size = new System.Drawing.Size(61, 23);
             this.btn2db.TabIndex = 18;
             this.btn2db.Text = "Gönder";
             this.btn2db.UseVisualStyleBackColor = true;
@@ -208,7 +209,7 @@
             // btnAll2Db
             // 
             this.btnAll2Db.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAll2Db.Location = new System.Drawing.Point(418, 284);
+            this.btnAll2Db.Location = new System.Drawing.Point(376, 284);
             this.btnAll2Db.Name = "btnAll2Db";
             this.btnAll2Db.Size = new System.Drawing.Size(105, 23);
             this.btnAll2Db.TabIndex = 19;
@@ -216,11 +217,24 @@
             this.btnAll2Db.UseVisualStyleBackColor = true;
             this.btnAll2Db.Click += new System.EventHandler(this.btnAll2Db_Click);
             // 
+            // btnSil
+            // 
+            this.btnSil.BackColor = System.Drawing.Color.Crimson;
+            this.btnSil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSil.Location = new System.Drawing.Point(487, 284);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(36, 23);
+            this.btnSil.TabIndex = 20;
+            this.btnSil.Text = "Sil";
+            this.btnSil.UseVisualStyleBackColor = false;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
+            // 
             // Employee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 364);
+            this.Controls.Add(this.btnSil);
             this.Controls.Add(this.btnAll2Db);
             this.Controls.Add(this.btn2db);
             this.Controls.Add(this.btnKaydet);
@@ -271,5 +285,6 @@
         private System.Windows.Forms.Button btnKaydet;
         private System.Windows.Forms.Button btn2db;
         private System.Windows.Forms.Button btnAll2Db;
+        private System.Windows.Forms.Button btnSil;
     }
 }

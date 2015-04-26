@@ -37,13 +37,41 @@ namespace AdoConnectedDisconnected.lib
             txtId.Value = id;
             txtId.Enabled = false;
         }
+        public void kaydet()
+        {
+            base.connect();
+            SqlCommand komut;
+            string sqlKod;
+
+            sqlKod = @"INSERT INTO Employees ";
+            sqlKod += "(FirstName, LastName, City, Country, BirthDate) ";
+            sqlKod += " VALUES (@Ad, @Soyad, @Sehir, @Ulke, @DogumTarihi)";
+            komut = parametreler(sqlKod);
+            komut.ExecuteScalar();
+
+            base.disconnect();
+        }
+
+        public void sil()
+        {
+            base.connect();
+            SqlCommand komut;
+            
+            string sqlKod;
+            sqlKod = @"DELETE FROM Employees WHERE EmployeeID = @ID";
+            komut = new SqlCommand(cmdText: sqlKod, connection: conn);
+            komut.Parameters.AddWithValue("@ID", id);
+            komut.ExecuteScalar();
+            base.disconnect();
+
+        }
         public void guncelle()
         {
             base.connect();
             SqlCommand komut;
             string sqlKod;
 
-            sqlKod = "UPDATE Employees ";
+            sqlKod = @"UPDATE Employees ";
             sqlKod += "SET FirstName = @Ad, ";
             sqlKod += "LastName = @Soyad, ";
             sqlKod += "City = @Sehir, ";
@@ -51,13 +79,7 @@ namespace AdoConnectedDisconnected.lib
             sqlKod += "BirthDate = @DogumTarihi ";
             sqlKod += " WHERE EmployeeID = @ID ; ";
 
-            komut = new SqlCommand(cmdText: sqlKod, connection: conn);
-            komut.Parameters.AddWithValue("@Ad", ad);
-            komut.Parameters.AddWithValue("@Soyad", soyad);
-            komut.Parameters.AddWithValue("@Sehir", sehir);
-            komut.Parameters.AddWithValue("@Ulke", ulke);
-            komut.Parameters.AddWithValue("@ID", id);
-            komut.Parameters.AddWithValue("@DogumTarihi", dogumTarihi);
+            komut = parametreler(sqlKod);
 
             komut.ExecuteScalar();
 
@@ -65,6 +87,19 @@ namespace AdoConnectedDisconnected.lib
 
             base.disconnect();
             
+        }
+
+        private SqlCommand parametreler(string sqlKod)
+        {
+            SqlCommand komut;
+            komut = new SqlCommand(cmdText: sqlKod, connection: conn);
+            komut.Parameters.AddWithValue("@Ad", ad);
+            komut.Parameters.AddWithValue("@Soyad", soyad);
+            komut.Parameters.AddWithValue("@Sehir", sehir);
+            komut.Parameters.AddWithValue("@Ulke", ulke);
+            komut.Parameters.AddWithValue("@ID", id);
+            komut.Parameters.AddWithValue("@DogumTarihi", dogumTarihi);
+            return komut;
         }
 
         public override string ToString()

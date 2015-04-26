@@ -15,7 +15,7 @@ namespace AdoConnectedDisconnected.ui
     public partial class Employee : Form
     {
         public List<lib.Employee> calisanlar = new List<lib.Employee>();
-        public lib.Employee guncellenecekCalisan;
+        public lib.Employee guncellenecekCalisan = null;
         public int guncellenecekCalisanID = -1;
 
         public Employee()
@@ -26,6 +26,13 @@ namespace AdoConnectedDisconnected.ui
         private void Employee_Load(object sender, EventArgs e)
         {
             // object skalerSonuc;
+            uiDbCalisanlariGetir();
+            uiYenile();
+            uiCheck();
+        }
+
+        private void uiDbCalisanlariGetir()
+        {
             string sqlKod;
             SqlConnection conn;
             SqlCommand sqlKomut;
@@ -53,23 +60,22 @@ namespace AdoConnectedDisconnected.ui
             // skalerSonuc = sqlKomut.ExecuteScalar();
             kafa = sqlKomut.ExecuteReader();
 
+            calisanlar.Clear();
             while (kafa.Read())
             {
                 calisanlar.Add(
                     new lib.Employee()
-                        {
-                            id = (int)kafa["EmployeeID"],
-                            ad = kafa["FirstName"].ToString(),
-                            soyad = kafa["LastName"].ToString(),
-                            dogumTarihi = (DateTime)kafa["BirthDate"],
-                            sehir = kafa["City"].ToString(),
-                            ulke = kafa["Country"].ToString()
-                        }
+                    {
+                        id = (int)kafa["EmployeeID"],
+                        ad = kafa["FirstName"].ToString(),
+                        soyad = kafa["LastName"].ToString(),
+                        dogumTarihi = (DateTime)kafa["BirthDate"],
+                        sehir = kafa["City"].ToString(),
+                        ulke = kafa["Country"].ToString()
+                    }
                 );
             }
 
-            uiYenile();
-            uiCheck();
         }
 
         private void lstEmployees_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,6 +110,7 @@ namespace AdoConnectedDisconnected.ui
 
         private void uiTemizle()
         {
+            guncellenecekCalisan = null;
             txtAd.Clear();
             txtID.Value = 0;
             txtSoyad.Clear();
@@ -111,17 +118,20 @@ namespace AdoConnectedDisconnected.ui
             txtUlke.Clear();
             dtpDogumTarihi.ResetText();
            // lstEmployees.SelectedIndex = -1;
+
         }
 
         private void uiYenile()
         {
             guncellenecekCalisan = null;
             uiListEmployees();
+            uiCheck();
         }
 
         private void uiListEmployees()
         {
             lstEmployees.DataSource = null;
+            lstEmployees.Items.Clear();
             lstEmployees.DataSource = calisanlar;
             lstEmployees.DisplayMember = "TamAd";
             lstEmployees.ValueMember = "id";
@@ -130,6 +140,8 @@ namespace AdoConnectedDisconnected.ui
         private void uiCheck()
         {
             btnGuncelle.Enabled = !(guncellenecekCalisan == null);
+            btnSil.Enabled = !(guncellenecekCalisan == null);
+
             btnKaydet.Enabled = guncellenecekCalisan == null;
             btn2db.Enabled = lstEmployees.SelectedIndex > -1;
         }
@@ -137,24 +149,36 @@ namespace AdoConnectedDisconnected.ui
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
+            uiYeniCalisan().kaydet();
+            uiDbCalisanlariGetir();
+
+            uiTemizle();
+            uiYenile();
 
         }
 
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
-            calisanlar[guncellenecekCalisanID] =
-            new lib.Employee()
-             {
-                 ad = txtAd.Text,
-                 soyad = txtSoyad.Text,
-                 sehir = txtSehir.Text,
-                 ulke = txtUlke.Text,
-                 dogumTarihi = dtpDogumTarihi.Value,
-                 changed = true,
-                 id = calisanlar[guncellenecekCalisanID].id
-             };
+
+            lib.Employee yeniCalisan = uiYeniCalisan();
+            yeniCalisan.id = calisanlar[guncellenecekCalisanID].id;
+            calisanlar[guncellenecekCalisanID] = yeniCalisan;
+
             uiTemizle();
             uiYenile();
+        }
+
+        private lib.Employee uiYeniCalisan()
+        {
+            return new lib.Employee()
+            {
+                ad = txtAd.Text,
+                soyad = txtSoyad.Text,
+                sehir = txtSehir.Text,
+                ulke = txtUlke.Text,
+                dogumTarihi = dtpDogumTarihi.Value,
+                changed = true
+            };
         }
 
         private void btn2db_Click(object sender, EventArgs e)
@@ -172,6 +196,21 @@ namespace AdoConnectedDisconnected.ui
             }
             uiYenile();
             btnAll2Db.Enabled = true;
+        }
+
+        private void btnSil_Click(object sender, EventArgs e)
+        {
+            ((lib.Employee)lstEmployees.SelectedItem).sil();
+            uiDbCalisanlariGetir();
+
+            guncellenecekCalisan = null;
+
+            uiYenile();
+
+            uiListEmployees();
+
+            uiTemizle();
+            uiCheck();
         }
     }
 }
