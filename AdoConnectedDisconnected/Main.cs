@@ -20,7 +20,8 @@ namespace AdoConnectedDisconnected
         private void calisanEklemeGuncellemeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new ui.Employee() {
-                MdiParent = this
+                MdiParent = this,
+                WindowState = FormWindowState.Maximized
             }.Show();
         }
 
@@ -28,7 +29,8 @@ namespace AdoConnectedDisconnected
         {
             new ui.Products()
             {
-                MdiParent = this
+                MdiParent = this,
+                WindowState = FormWindowState.Maximized
             }.Show();
 
         }
@@ -37,19 +39,19 @@ namespace AdoConnectedDisconnected
         {
             new ui.Products()
             {
-                MdiParent = this
+                MdiParent = this,
+                WindowState = FormWindowState.Maximized
             }.Show();
 
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            new ui.Employee()
+            new ui.Products()
             {
-                MdiParent = this
+                MdiParent = this,
+                WindowState = FormWindowState.Maximized
             }.Show();
-
-
         }
     }
 }
