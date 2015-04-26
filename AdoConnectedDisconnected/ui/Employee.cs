@@ -31,7 +31,6 @@ namespace AdoConnectedDisconnected.ui
             SqlCommand sqlKomut;
             SqlDataReader kafa;
 
-
             try
             {
                 conn = lib.dbObject.dbConnect("NORTHWND");
@@ -71,13 +70,6 @@ namespace AdoConnectedDisconnected.ui
 
             uiYenile();
             uiCheck();
-
-
-            //lstEmployees.DataSource = calisanlar;
-            //lstEmployees.DisplayMember = "TamAd";
-            //lstEmployees.ValueMember = "id";
-
-
         }
 
         private void lstEmployees_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,15 +116,19 @@ namespace AdoConnectedDisconnected.ui
         private void uiYenile()
         {
             guncellenecekCalisan = null;
+            uiListEmployees();
+        }
 
-
-            lstEmployees.Items.Clear();
-            lstEmployees.Items.AddRange(calisanlar.ToArray());
+        private void uiListEmployees()
+        {
+            lstEmployees.DataSource = null;
+            lstEmployees.DataSource = calisanlar;
+            lstEmployees.DisplayMember = "TamAd";
+            lstEmployees.ValueMember = "id";
         }
 
         private void uiCheck()
         {
-
             btnGuncelle.Enabled = !(guncellenecekCalisan == null);
             btnKaydet.Enabled = guncellenecekCalisan == null;
             btn2db.Enabled = lstEmployees.SelectedIndex > -1;
@@ -141,7 +137,6 @@ namespace AdoConnectedDisconnected.ui
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-
 
         }
 
@@ -178,9 +173,5 @@ namespace AdoConnectedDisconnected.ui
             uiYenile();
             btnAll2Db.Enabled = true;
         }
-
-
-
-
     }
 }
