@@ -170,11 +170,13 @@ namespace AdoConnectedDisconnected.ui
 
         private void btnAll2Db_Click(object sender, EventArgs e)
         {
+            btnAll2Db.Enabled = false;
             foreach (var c in lstEmployees.Items)
             {
                  ((lib.Employee)c).guncelle();
             }
             uiYenile();
+            btnAll2Db.Enabled = true;
         }
 
 
