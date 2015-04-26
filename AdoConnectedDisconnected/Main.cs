@@ -47,7 +47,7 @@ namespace AdoConnectedDisconnected
 
         private void Main_Load(object sender, EventArgs e)
         {
-            new ui.Products()
+            new ui.Orders()
             {
                 MdiParent = this,
                 WindowState = FormWindowState.Maximized
