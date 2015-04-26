@@ -37,7 +37,7 @@ namespace AdoConnectedDisconnected
 
         private void siparisDetayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ui.Products()
+            new ui.Orders()
             {
                 MdiParent = this,
                 WindowState = FormWindowState.Maximized
@@ -47,11 +47,11 @@ namespace AdoConnectedDisconnected
 
         private void Main_Load(object sender, EventArgs e)
         {
-            new ui.Orders()
-            {
-                MdiParent = this,
-                WindowState = FormWindowState.Maximized
-            }.Show();
+            //new ui.Employee()
+            //{
+            //    MdiParent = this,
+            //    WindowState = FormWindowState.Maximized
+            //}.Show();
         }
     }
 }

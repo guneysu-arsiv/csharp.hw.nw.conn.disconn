@@ -81,7 +81,15 @@ namespace AdoConnectedDisconnected.lib
 
             komut = parametreler(sqlKod);
 
-            komut.ExecuteScalar();
+            try
+            {
+                komut.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message,"Hata Oluştu", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
             changed = false;
 

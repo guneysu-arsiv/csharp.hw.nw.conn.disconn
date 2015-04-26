@@ -29,6 +29,11 @@ namespace AdoConnectedDisconnected.ui
             uiDbCalisanlariGetir();
             uiYenile();
             uiCheck();
+
+            lstEmployees.DataSource = calisanlar;
+            lstEmployees.DisplayMember = "TamAd";
+            lstEmployees.ValueMember = "id";
+
         }
 
         private void uiDbCalisanlariGetir()
@@ -133,8 +138,7 @@ namespace AdoConnectedDisconnected.ui
             lstEmployees.DataSource = null;
             lstEmployees.Items.Clear();
             lstEmployees.DataSource = calisanlar;
-            lstEmployees.DisplayMember = "TamAd";
-            lstEmployees.ValueMember = "id";
+ 
         }
 
         private void uiCheck()
@@ -184,6 +188,7 @@ namespace AdoConnectedDisconnected.ui
         private void btn2db_Click(object sender, EventArgs e)
         {
             ((lib.Employee)lstEmployees.SelectedItem).guncelle();
+            uiDbCalisanlariGetir();
             uiYenile();
         }
 
@@ -195,6 +200,8 @@ namespace AdoConnectedDisconnected.ui
                  ((lib.Employee)c).guncelle();
             }
             uiYenile();
+            uiDbCalisanlariGetir();
+
             btnAll2Db.Enabled = true;
         }
 
